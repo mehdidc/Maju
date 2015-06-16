@@ -100,13 +100,13 @@ class FeatureExtractor(object):
         data = temperatures_xray['tas'].values
         n_times, n_lats, n_lons = data.shape
         X_ = []
-        
+
         #llg = 192
         #lat = 288
         llg = 192
         lat = 288
 
         for k in valid_range:
-            X_.append(data[k - 2:k - 1, 0:llg, 0:lat])
+            X_.append(data[k - 2:k + 1, 0:llg, 0:lat])
         X = np.concatenate((X, np.array(X_).reshape((-1, llg*lat))), axis=1)
         return X
