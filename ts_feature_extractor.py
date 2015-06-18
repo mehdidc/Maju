@@ -103,10 +103,12 @@ class FeatureExtractor(object):
 
         #llg = 192
         #lat = 288
-        llg = 192
-        lat = 288
+        #llg = 192
+        #lat = 288
 
         for k in valid_range:
-            X_.append(data[k - 2:k + 1, 0:llg, 0:lat])
-        X = np.concatenate((X, np.array(X_).reshape((-1, llg*lat))), axis=1)
+            X_.append(data[k - 2:k + 1, :, :])
+        X_ = np.array(X_)
+        X_ = X_.reshape((X_.shape[0], X_.shape[1]*X_.shape[2]))
+        X = np.concatenate((X, X_), axis=1)
         return X
